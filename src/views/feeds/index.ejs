@@ -1,0 +1,40 @@
+<%- include('../partials/header', { pageTitle: 'Recent posts' }) %>
+
+<section aria-labelledby="page-title">
+  <div class="page-heading">
+    <div>
+      <h1 id="page-title">Recent posts</h1>
+      <p class="muted">A place to share an idea and join the conversation.</p>
+    </div>
+    <a class="button" href="/posts/new">Create a post</a>
+  </div>
+
+  <% if (posts.length === 0) { %>
+    <div class="card empty-state">
+      <p>There aren't any posts yet.</p>
+      <a href="/posts/new">Be the first to write one.</a>
+    </div>
+  <% } else { %>
+    <div class="post-list">
+      <% posts.forEach((post) => { %>
+        <article class="card">
+          <h2>
+            <a class="post-title" href="/posts/<%= encodeURIComponent(post.id) %>"><%= post.title %></a>
+          </h2>
+          <div class="post-meta">
+            <span class="muted"><%= post.author %></span>
+            <% if (post.createdAt) { %>
+              <time datetime="<%= post.createdAt %>"><%= new Date(post.createdAt).toLocaleDateString() %></time>
+            <% } %>
+          </div>
+          <p class="post-body"><%= post.body %></p>
+          <a class="text-link" href="/posts/<%= encodeURIComponent(post.id) %>">
+            View discussion (<%= (post.comments || []).length %>)
+          </a>
+        </article>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('../partials/footer') %>

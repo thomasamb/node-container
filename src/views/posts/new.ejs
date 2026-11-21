@@ -1,0 +1,30 @@
+<%- include('../partials/header', { pageTitle: 'Write a post' }) %>
+
+<section class="card" aria-labelledby="page-title">
+  <h1 id="page-title">Write a post</h1>
+  <p class="muted">Share something with the community.</p>
+
+  <form action="/posts" method="post">
+    <label for="author">
+      Your name
+      <input id="author" name="author" type="text" maxlength="80" autocomplete="name" required>
+    </label>
+
+    <label for="title">
+      Title
+      <input id="title" name="title" type="text" maxlength="160" required>
+    </label>
+
+    <label for="body">
+      Post
+      <textarea id="body" name="body" maxlength="10000" required></textarea>
+    </label>
+
+    <div class="page-heading">
+      <a class="text-link" href="/">Cancel</a>
+      <button type="submit">Publish post</button>
+    </div>
+  </form>
+</section>
+
+<%- include('../partials/footer') %>
