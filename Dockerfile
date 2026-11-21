@@ -1,7 +1,10 @@
 FROM node:22-alpine22
 
 WORKDIR /usr/src/app
-COPY . /usr/src/app
-RUN npm install
+COPY package*.json ./
+RUN npm ci
 
-ENTRYPOINT ["node" "app.js"]
+COPY . .
+EXPOSE 3000
+
+CMD ["node" "src/server.js"]
